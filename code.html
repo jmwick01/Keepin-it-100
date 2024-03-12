@@ -56,17 +56,81 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function helloWorld() {
-                            alert("Hello World");    
+
+
+
+                        //get the values from the page
+                        //start or controller function
+                        function getValues() {
+                            //get values from the page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+                        
+                            //we need to validate our input
+                            //parse into Integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+                        
+                            if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                //call generateNumbers
+                                let numbers = generateNumbers(startValue, endValue);
+                                //call displayNumbers
+                                displayNumbers(numbers);
+                            } else {
+                                alert("You must enter integers");        
+                            }
+                        
+                            
+                            
+                        }
+                        
+                        //generate numbers from the start value to the end value
+                        //logic funtion(s)
+                        function generateNumbers(sValue, eValue) {
+                            
+                            let numbers = [];
+                        
+                            //we want to get all numbers from start to end
+                            for (let index = sValue; index <= eValue; index++) {
+                        
+                                //this will execute in a loop until index = eValue
+                                numbers.push(index);
+                                
+                            }
+                            return numbers;
+                        
+                        }
+                        
+                        //display the numbers and mark even numbers bold
+                        //display or view function
+                        function displayNumbers(numbers) {
+                        
+                            let templateRows = "";
+                            for (let index = 0; index < numbers.length; index++) {
+                                let className = "even";
+                                let number = numbers[index];
+                        
+                                if (number % 2 == 0) {
+                                    className = "even";
+                                } else {
+                                    className = "odd";
+                                }
+                                templateRows += `&lt;tr>&lt;td class="${className}" >${number}&lt;/td>&lt;/tr>`;
+                            }
+                        
+                            document.getElementById("results").innerHTML = templateRows;
                         }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with the message of "Hello World".</p>
+                    <p>The code is structured in three functions.</p>
+                    <h5>getValues</h5>
+                    <p>getValues is a function that takes the values provided by the user and converts them to integers. It will test to ensure the values are integers or else it will throw an error. If successful, it will call the other functions.</p>
+                    <h5>generateNumbers</h5>
+                    <p>generateNumbers is a function that takes the starting value provided by the user and places it in an array. It increments by 1 while continuing to place each new number in the array. This will continue until the end value has been reached.</p>
+                    <h5>displayNumbers</h5>
+                    <p>displayNumbers is a function that writes out the numbers to the page. It also checks to see if the number is divisible by 2, and if so changes it's class to even so that the number appears bold.</p>
                 </div>
             </div>
         </div>
